@@ -6,13 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Card Settings")]
     public GameObject cardPrefab;
     public Sprite[] cardSprites; // 5 hình
     public Sprite backSprite;
 
+    [Header("Grid Settings (9:16 Portrait)")]
+    // 🔥 Đưa ra ngoài để dễ chỉnh trên Inspector. Màn dọc nên để 2 hoặc 3 cột.
+    public int columns = 2;
+    public float spacing = 1.8f; // Có thể tăng giảm chút đỉnh cho vừa mắt
+
+    [Header("UI Settings")]
     public TextMeshProUGUI scoreText;
     public GameObject scoreUI;
-
     public GameObject endPanel;
     public TextMeshProUGUI finalScoreText;
 
@@ -63,11 +69,8 @@ public class GameManager : MonoBehaviour
             spawnList[rand] = temp;
         }
 
-        // 🔥 spawn + grid
-        float spacing = 1.5f;
-        int columns = 5;
-
         // 🔥 tính trước (chỉ 1 lần)
+        // Số hàng giờ sẽ tự động giãn dài xuống dưới tùy thuộc vào số cột fen chọn
         int rows = Mathf.CeilToInt((float)spawnList.Count / columns);
         float width = (columns - 1) * spacing;
         float height = (rows - 1) * spacing;
@@ -83,6 +86,7 @@ public class GameManager : MonoBehaviour
             int col = i % columns;
             int row = i / columns;
 
+            // Thuật toán này của fen căn tâm (0,0) rất chuẩn, giữ nguyên
             float x = col * spacing - width / 2f;
             float y = height / 2f - row * spacing;
 
@@ -150,9 +154,13 @@ public class GameManager : MonoBehaviour
 
         canClick = true;
     }
+
     void UpdateScoreUI()
     {
-        scoreText.text = "Score: " + score;
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score;
+        }
     }
 
     void EndGame()
@@ -162,13 +170,15 @@ public class GameManager : MonoBehaviour
             scoreUI.SetActive(false);
 
         // 🔥 hiện panel kết thúc
-        endPanel.SetActive(true);
+        if (endPanel != null)
+            endPanel.SetActive(true);
 
         if (finalScoreText != null)
         {
             finalScoreText.text = "Score: " + score;
         }
     }
+
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
