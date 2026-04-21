@@ -371,6 +371,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 869efac42d6653b4d8b03cb45349c94a, type: 3}
   - {fileID: 21300000, guid: f5c7f3d83e153a242b609733c01544c8, type: 3}
   backSprite: {fileID: 21300000, guid: 89ef5ffb3d402b24d83ae6b42302999e, type: 3}
+  columns: 2
+  spacing: 1.8
   scoreText: {fileID: 1057611169}
   scoreUI: {fileID: 1057611167}
   endPanel: {fileID: 7038121}
@@ -748,7 +750,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -102, y: 494}
+  m_AnchoredPosition: {x: -64, y: 912}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1057611169
